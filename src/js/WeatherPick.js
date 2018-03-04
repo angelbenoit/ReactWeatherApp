@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
+import SideDisplay from './SideDisplay';
 import '../css/WeatherPick.css';
-
 
 
 class WeatherPick extends Component{
     constructor(props){
         super(props);
         this.state = {
-            temp: 0,
-            city: ""
+            temp: [],
+            city: "",
+            time: [],
+            date: []
         };
         this.getData = this.getData.bind(this);
+        this.collectData = this.collectData.bind(this);
         this.kelvinToFahrenheit = this.kelvinToFahrenheit.bind(this);
     }
 
@@ -21,6 +24,7 @@ class WeatherPick extends Component{
             .then((response) => response.json())
             .then((data) => {
                 let city = data.city.name;
+                this.collectData(data);
                 this.setState({
                     city: city
                 });
@@ -29,21 +33,17 @@ class WeatherPick extends Component{
             });
     };
 
+    /*Converts the kelvin temperature given from api to fahrenheit*/
     kelvinToFahrenheit = (kelvin) => {
-      let fahrenheit = 1.8*(kelvin - 273) + 32;
-      this.setState({
-          temp: fahrenheit
-      })
+      return 1.8*(kelvin - 273) + 32;
     };
 
     getLocation = () => {
-        if( navigator.geolocation )
-        {
+        if( navigator.geolocation ){
             // Call getCurrentPosition with success and failure callbacks
             navigator.geolocation.getCurrentPosition(this.success, this.fail );
         }
-        else
-        {
+        else{
             alert("Sorry, your browser does not support geolocation services.");
         }
     };
@@ -58,14 +58,24 @@ class WeatherPick extends Component{
         alert("ERROR: CANT GET LOCATION");
     };
 
-    
+    collectData = (data) => {
+        let temps = [];
+        data.list.forEach((temperature) => {
+            temps.push(this.kelvinToFahrenheit(temperature.main.temp));
+        });
+        this.setState({
+            temp: temps
+        });
+    };
     render(){
+        this.getLocation();
         return (
-            <div>
-                <h1>{this.state.temp}</h1>
-                <h1>{this.state.city}</h1>
-                <button onClick={this.getLocation}>click</button>
-            </div>
+                <div>
+                    <SideDisplay
+                        temp={this.state.temp}
+                    />
+                </div>
+
         )
     }
 }

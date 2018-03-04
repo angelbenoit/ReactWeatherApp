@@ -1,0 +1,5 @@
+.side{
+    float: left;
+    border: 1px solid gray;
+    display:block;
+}
