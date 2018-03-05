@@ -8,7 +8,6 @@ class WeatherPick extends Component{
         super(props);
         this.state = {
             temp: [],
-            city: "",
             time: [],
             date: []
         };
@@ -17,19 +16,16 @@ class WeatherPick extends Component{
         this.kelvinToFahrenheit = this.kelvinToFahrenheit.bind(this);
     }
 
+    //TO CONVERT TIME INTO DATE
+    // var d = new Date(timestamp*1000);
+    // console.log(d);
 
     getData = (latitude, longitude) => {
-        let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=1e54de88d0e253a44e2f06f4b9bed550`;
+        let url = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/c81c141332e2654bd0fb53064d0b1402/${latitude},${longitude}`;
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                let city = data.city.name;
                 this.collectData(data);
-                this.setState({
-                    city: city
-                });
-                let temp = data.list[0].main.temp;
-                this.kelvinToFahrenheit(temp);
             });
     };
 
@@ -60,8 +56,8 @@ class WeatherPick extends Component{
 
     collectData = (data) => {
         let temps = [];
-        data.list.forEach((temperature) => {
-            temps.push(this.kelvinToFahrenheit(temperature.main.temp));
+        data.daily.data.forEach((temperature) => {
+            temps.push(temperature.temperatureHigh);
         });
         this.setState({
             temp: temps
