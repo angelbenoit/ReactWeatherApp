@@ -1,5 +1,6 @@
 .side{
-    float: left;
+    width: 40%;
     border: 1px solid gray;
-    display:block;
+    display: flex;
+    flex-direction:column;
 }

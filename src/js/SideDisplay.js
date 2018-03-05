@@ -10,8 +10,9 @@ class SideDisplay extends Component{
         let temps = [];
         arr.forEach(item => {
             temps.push(
-                    <div>
-                        {item}
+                    <div className="side">
+                        <h1>{item.tempHigh}</h1>
+                        <p>{item.time}</p>
                     </div>
             )
         });
@@ -20,7 +21,7 @@ class SideDisplay extends Component{
     render(){
         let temps = this.display(this.props.temp);
         return (
-            <div className="side">
+            <div>
                 {temps}
             </div>
         )
