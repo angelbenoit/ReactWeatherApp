@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import SideDisplay from './SideDisplay';
 import '../css/WeatherPick.css';
+import MoreDetail from "./MoreDetail";
 
 
 class WeatherPick extends Component{
     constructor(props){
         super(props);
         this.state = {
+            pickedDate: {},
             dataObj: []
         };
         this.getData = this.getData.bind(this);
         this.collectData = this.collectData.bind(this);
+        this.displayMoreDetail = this.displayMoreDetail.bind(this);
 
     }
 
@@ -56,7 +59,7 @@ class WeatherPick extends Component{
         data.daily.data.forEach((temperature) => {
             dataObj.push(
                 {
-                    time: Date(temperature.time*1000),
+                    time: temperature.time,
                     summary: temperature.summary,
                     tempHigh: temperature.temperatureHigh,
                     tempLow: temperature.temperatureLow,
@@ -68,11 +71,22 @@ class WeatherPick extends Component{
             dataObj
         });
     };
+
+    displayMoreDetail = (item) => {
+        this.setState({
+            pickedDate: item
+        })
+    };
+
     render(){
         return (
                 <div>
                     <SideDisplay
                         temp={this.state.dataObj}
+                        displayMoreDetail={this.displayMoreDetail}
+                    />
+                    <MoreDetail
+                        thing={this.state.pickedDate}
                     />
                 </div>
 

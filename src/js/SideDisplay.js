@@ -6,13 +6,18 @@ class SideDisplay extends Component{
         super(props);
         this.display = this.display.bind(this);
     }
+
     display = (arr) => {
         let temps = [];
-        arr.forEach(item => {
+        let day = new Date();
+        arr.forEach((item,i) => {
+            //this gets the dates for the week depending on index
+            let nextDay = new Date(day);
+            nextDay.setDate(day.getDate() + i);
             temps.push(
-                    <div className="side">
+                    <div className="side" onClick={() => this.props.displayMoreDetail(item)}>
                         <h1>{item.tempHigh}</h1>
-                        <p>{item.time}</p>
+                        <p>{nextDay.toString().substring(0,16)}</p>
                     </div>
             )
         });
@@ -21,7 +26,7 @@ class SideDisplay extends Component{
     render(){
         let temps = this.display(this.props.temp);
         return (
-            <div>
+            <div className="left">
                 {temps}
             </div>
         )

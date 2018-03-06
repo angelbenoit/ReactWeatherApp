@@ -1,6 +1,16 @@
 .side{
-    width: 40%;
     border: 1px solid gray;
     display: flex;
     flex-direction:column;
+}
+
+.rightSide{
+    width: 60%;
+    float: right;
+    height: 100%;
+}
+
+.left{
+    width: 40%;
+    float: left;
 }
