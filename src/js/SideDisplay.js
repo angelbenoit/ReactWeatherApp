@@ -16,12 +16,16 @@ class SideDisplay extends Component{
             nextDay.setDate(day.getDate() + i);
             temps.push(
                     <div className="side" onClick={() => this.props.displayMoreDetail(item)}>
-                        <h1>{item.tempHigh}</h1>
+                        <h1>Avg Temp: {this.getAverageTemp(item.tempHigh, item.tempLow)}</h1>
                         <p>{nextDay.toString().substring(0,16)}</p>
                     </div>
             )
         });
         return temps;
+    };
+
+    getAverageTemp = (temp1, temp2) => {
+        return Math.round((temp1 + temp2)/2);
     };
     render(){
         let temps = this.display(this.props.temp);

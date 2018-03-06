@@ -1,13 +1,34 @@
-.side{
-    border: 1px solid gray;
-    display: flex;
-    flex-direction:column;
+body{
+    background: linear-gradient(
+            to right,
+            #68ff00 0%,
+            #26bf00 40%,
+            #00abff 40%,
+            #007ba2 100%
+    );
 }
 
-.rightSide{
+.side{
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: white;
+    font-family: "Cambria Math", cursive;
+    padding-top: 5%;
+    display: flex;
+    flex-direction:column;
+
+}
+
+#rightSide{
+    font-family: "Cambria Math", cursive;
     width: 60%;
     float: right;
-    height: 100%;
+    color: white;
+    visibility: hidden;
+    padding-top: 20%;
+}
+
+.headerDetail{
+    text-align: center;
 }
 
 .left{

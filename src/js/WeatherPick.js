@@ -73,6 +73,7 @@ class WeatherPick extends Component{
     };
 
     displayMoreDetail = (item) => {
+        document.getElementById("rightSide").style.visibility = "visible";
         this.setState({
             pickedDate: item
         })
