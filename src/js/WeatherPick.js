@@ -63,10 +63,12 @@ class WeatherPick extends Component{
                     summary: temperature.summary,
                     tempHigh: temperature.temperatureHigh,
                     tempLow: temperature.temperatureLow,
-                    humidity: temperature.humidity
+                    humidity: temperature.humidity,
+                    icon: temperature.icon.replace(/"-"/g, "_").toUpperCase()
                 }
             );
         });
+        //fix icon, to only allow allowed icon from animated weather package
         this.setState({
             dataObj
         });
