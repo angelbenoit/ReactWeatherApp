@@ -13,6 +13,9 @@ class MoreDetail extends Component{
         const stle = {"height": "40%", "width": "40%", marginLeft: "30%"};
         return (
             <div id="rightSide">
+                <h1>
+                    {this.props.city}
+                </h1>
                 <h3 className="headerDetail">
                    <em>Temperature: {Math.round((tempHigh+tempLow)/2)}</em>
                 </h3>
