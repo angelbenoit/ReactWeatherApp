@@ -12,11 +12,14 @@ class WeatherPick extends Component{
             //pickedDate is the data that will display extra detail on the right
             pickedDate: {},
             //dataObj is the array of objects
-            dataObj: []
+            dataObj: [],
+            //fahrenheit, if true, displays fahrenheit, if false, display celsius
+            fahrenheit: true
         };
         this.getData = this.getData.bind(this);
         this.getCity = this.getCity.bind(this);
         this.collectData = this.collectData.bind(this);
+        this.displayCelsius = this.displayCelsius.bind(this);
         this.displayMoreDetail = this.displayMoreDetail.bind(this);
 
     }
@@ -66,8 +69,8 @@ class WeatherPick extends Component{
                 {
                     time: temperature.time,
                     summary: temperature.summary,
-                    tempHigh: temperature.temperatureHigh,
-                    tempLow: temperature.temperatureLow,
+                    tempHigh: this.state.fahrenheit ? temperature.temperatureHigh : this.fahrenheitToCelsius(temperature.temperatureHigh),
+                    tempLow: this.state.fahrenheit ? temperature.temperatureLow : this.fahrenheitToCelsius(temperature.temperatureLow),
                     humidity: temperature.humidity,
                     //to get the weather icon animations, we needs all underscores, so we replace them
                     icon: temperature.icon.replace(/-/g, "_").toUpperCase()
@@ -95,11 +98,22 @@ class WeatherPick extends Component{
     getCity = (lat, long) => {
         let language = "en";
         let url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=true&language="+language;
+        console.log(url);
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({city: data.results[0].address_components[2].long_name});
             })
+    };
+
+    fahrenheitToCelsius = (temp) => {
+        return (temp - 32)*(5/9);
+    };
+
+    displayCelsius = () => {
+        console.log("Converted");
+        this.getLocation();
+        this.setState({fahrenheit: !this.state.fahrenheit});
     };
 
     render(){
@@ -112,6 +126,9 @@ class WeatherPick extends Component{
                     <MoreDetail
                         city={this.state.city}
                         thing={this.state.pickedDate}
+                        fahrenheitOrCelsius={this.state.fahrenheit}
+                        displayCelsius={this.displayCelsius}
+                        tempConvert = {this.fahrenheitToCelsius}
                     />
                 </div>
 
