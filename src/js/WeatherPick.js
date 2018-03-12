@@ -97,7 +97,7 @@ class WeatherPick extends Component{
     //google api gives us the city name because darksky api doesn't display city
     getCity = (lat, long) => {
         let language = "en";
-        let url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=true&language="+language;
+        let url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=true&language="+language+"?key=AIzaSyAPEoCWjHHl1UPZWOmBkSi2dZg24j2EIyk";
         console.log(url);
         fetch(url)
             .then((response) => response.json())

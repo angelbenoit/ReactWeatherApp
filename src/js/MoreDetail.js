@@ -19,8 +19,8 @@ class MoreDetail extends Component{
                 <h3 className="headerDetail">
                    <em>Temperature: {
                        this.props.fahrenheitOrCelsius ?
-                       Math.round((tempHigh+tempLow)/2) :
-                       this.props.tempConvert(Math.round((tempHigh+tempLow)/2))
+                       Math.round((tempHigh+tempLow)/2).toFixed(1) :
+                       Math.round(this.props.tempConvert((tempHigh+tempLow)/2))
                     }°
                    </em>
                 </h3>
@@ -36,12 +36,12 @@ class MoreDetail extends Component{
                 </div>
                 <p className="headerDetail">
                     Temperature High: {
-                    this.props.fahrenheitOrCelsius ? tempHigh : this.props.tempConvert(tempHigh)
+                    this.props.fahrenheitOrCelsius ? Math.round(tempHigh) : Math.round(this.props.tempConvert(tempHigh))
                 }°
                 </p>
                 <p className="headerDetail">
                     Temperature Low: {
-                    this.props.fahrenheitOrCelsius ? tempLow : this.props.tempConvert(tempLow)
+                    this.props.fahrenheitOrCelsius ? Math.round(tempLow) : Math.round(this.props.tempConvert(tempLow))
                 }°
                 </p>
                 <p>

@@ -27,7 +27,7 @@ class SideDisplay extends Component{
     };
 
     getAverageTemp = (temp1, temp2) => {
-        return Math.round((temp1 + temp2)/2);
+        return Math.round((temp1 + temp2)/2).toFixed(1);
     };
     render(){
         //call display() to display the divs
