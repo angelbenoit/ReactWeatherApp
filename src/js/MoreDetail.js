@@ -21,12 +21,9 @@ class MoreDetail extends Component{
                        this.props.fahrenheitOrCelsius ?
                        Math.round((tempHigh+tempLow)/2).toFixed(1) :
                        Math.round(this.props.tempConvert((tempHigh+tempLow)/2))
-                    }°
+                    }F°
                    </em>
                 </h3>
-                <h4 onClick={() => this.props.displayCelsius()}>
-                    {this.props.fahrenheitOrCelsius ? "Convert to Celsius" : "Convert to Fahrenheit"}
-                </h4>
                 <div style={stle}>
                     <Skycons
                         color='white'
@@ -37,12 +34,12 @@ class MoreDetail extends Component{
                 <p className="headerDetail">
                     Temperature High: {
                     this.props.fahrenheitOrCelsius ? Math.round(tempHigh) : Math.round(this.props.tempConvert(tempHigh))
-                }°
+                }F°
                 </p>
                 <p className="headerDetail">
                     Temperature Low: {
                     this.props.fahrenheitOrCelsius ? Math.round(tempLow) : Math.round(this.props.tempConvert(tempLow))
-                }°
+                }F°
                 </p>
                 <p>
                     Humidity for today: {humidity}

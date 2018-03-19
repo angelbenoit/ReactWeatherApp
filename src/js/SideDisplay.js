@@ -18,7 +18,7 @@ class SideDisplay extends Component{
             temps.push(
                     //if user clicks on this div, it will show more detail about it on the right side
                     <div className="side" onClick={() => this.props.displayMoreDetail(item)}>
-                        <h1>Avg Temp: {this.getAverageTemp(item.tempHigh, item.tempLow)}°</h1>
+                        <h1>Avg Temp: {this.getAverageTemp(item.tempHigh, item.tempLow)}F°</h1>
                         <p>{nextDay.toString().substring(0,16)}</p>
                     </div>
             )

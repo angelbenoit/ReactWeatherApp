@@ -14,7 +14,7 @@ class WeatherPick extends Component{
             //dataObj is the array of objects
             dataObj: [],
             //fahrenheit, if true, displays fahrenheit, if false, display celsius
-            fahrenheit: true
+            fahrenheit: true,
         };
         this.getData = this.getData.bind(this);
         this.getCity = this.getCity.bind(this);
@@ -69,8 +69,8 @@ class WeatherPick extends Component{
                 {
                     time: temperature.time,
                     summary: temperature.summary,
-                    tempHigh: this.state.fahrenheit ? temperature.temperatureHigh : this.fahrenheitToCelsius(temperature.temperatureHigh),
-                    tempLow: this.state.fahrenheit ? temperature.temperatureLow : this.fahrenheitToCelsius(temperature.temperatureLow),
+                    tempHigh: temperature.temperatureHigh,
+                    tempLow: temperature.temperatureLow,
                     humidity: temperature.humidity,
                     //to get the weather icon animations, we needs all underscores, so we replace them
                     icon: temperature.icon.replace(/-/g, "_").toUpperCase()
@@ -106,10 +106,6 @@ class WeatherPick extends Component{
             })
     };
 
-    fahrenheitToCelsius = (temp) => {
-        return (temp - 32)*(5/9);
-    };
-
     displayCelsius = () => {
         console.log("Converted");
         this.getLocation();
@@ -128,7 +124,6 @@ class WeatherPick extends Component{
                         thing={this.state.pickedDate}
                         fahrenheitOrCelsius={this.state.fahrenheit}
                         displayCelsius={this.displayCelsius}
-                        tempConvert = {this.fahrenheitToCelsius}
                     />
                 </div>
 
